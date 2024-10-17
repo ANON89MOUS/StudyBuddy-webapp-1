@@ -1,9 +1,111 @@
-<div class="community-wrapper">
-  <div class="sidenav-wrapper"></div>
-  <div class="blog-wrapper">
-    
-    <app-blog [blogs]="exampleBlogPosts"></app-blog>
-  </div>
-  <div class="calendar-wrapper"></div>
+<!-- Navbar -->
+<header>
+  <nav>
+    <a href="#home" id="logo">
+      <img src="../../../assets/studybuddy.png" alt="StudyBuddy Logo" />
+      <span class="study">Study</span>
+      <span class="buddy">Buddy</span>
+    </a>
+    <ul id="nav-bar">
+      <li><a (click)="goToHome()">Home</a></li>
+      <li><a (click)="logout()">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+
+ <!-- side navbar -->
+ <div class="sidebar">
+  <nav>
+    <ul>
+      <li>
+        <img class="sidebar-icon" src="../../../assets/group.png" /><a href="#"
+          >Community</a
+        >
+      </li>
+      <li>
+        <img class="sidebar-icon" src="../../../assets/books.png" /><a
+          href="course.html"
+          >Course</a
+        >
+      </li>
+    </ul>
+  </nav>
 </div>
 
+<!-- Post container box -->
+<div class="post-box">
+  <div class="post-box-container">
+    <img class="profile" src="../../../assets/user.png" alt="Profile" />
+    <input type="text" placeholder="What do you want to post?" id="post-input" />
+    <div class="button-group">
+      <button class="action-btn" (click)="openPostModal()">Post</button>
+    </div>
+  </div>
+</div>
+
+<!-- Post Modal -->
+<div class="post-modal-backdrop" id="post-modal-backdrop" style="display: none">
+  <div class="post-modal">
+    <div class="left">
+      <button class="back-btn" (click)="closePostModal()">✖</button>
+    </div>
+
+    <div class="content">
+      <div class="user">
+        <div class="user-avatar">
+          <img src="../../../assets/user.png" alt="Profile" />
+        </div>
+        <div class="user-details">
+          <p class="user-name">Pushpa Vishwakarma</p>
+        </div>
+      </div>
+
+      <div id="post-text" contenteditable="true" class="editable-text"></div>
+
+      <div class="last-btn">
+        <button class="add-media-btn" (click)="uploadImage($event)">
+          <img src="../../../assets/camera.png" alt="camera-img" />
+        </button>
+        <input type="file" id="file-input" accept="image/*" style="display: none" />
+        <button class="post-btn">Post</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Community Posts -->
+<div class="cont" id="posts-container">
+  <div class="post-container">
+    <div class="headers">
+      <img class="profile-pic" src="../../../assets/user.png" alt="Profile Picture" />
+      <div class="user-info">
+        <h2>Pushpa Vishwakarma</h2>
+        <p>Mindful Observer 🧐 14 Oct 2024</p>
+      </div>
+    </div>
+
+    <h3>What is the coolest line in history?</h3>
+    <p>
+      Last year, after the Chandrayaan 3 launch, a British journalist, Patrick Christie,
+      said, "Congratulate India on landing on the dark side of the moon. I would also
+      like to now invite India to return the £2.3 billion aid money we sent
+      <span id="more-text" style="display: none">them between 2020." </span>
+      <span id="read-more" (click)="toggleMore()"> Read More</span>
+    </p>
+
+    <div class="interaction-bar">
+      <button class="interaction-button" (click)="incrementLike()">
+        <i class="fas fa-thumbs-up"></i> <span>{{ likeCount }}</span> Likes
+      </button>
+      <button class="interaction-button" (click)="toggleCommentSection()">
+        <i class="fas fa-comment"></i> <span>{{ commentCount }}</span> Comments
+      </button>
+    </div>
+
+    <div id="comment-section" style="display: none">
+      <div id="comments-list"></div>
+      <textarea id="comment-input" placeholder="Add a comment..."></textarea>
+      <button (click)="submitComment(commentInput.value)">Submit</button>
+    </div>
+  </div>
+</div>
